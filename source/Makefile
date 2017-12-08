@@ -1,4 +1,5 @@
 CCFLAGS=-c -O2 -fPIC
+EXTRA_CXXFLAGS += -std=gnu++11
 
 # build omega2Gpio executable when user executes "make"
 SOURCES=$(shell find -name "*.cpp" | sed s:./:: | tr "\n" " ")
