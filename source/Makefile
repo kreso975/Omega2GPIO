@@ -1,5 +1,5 @@
 CCFLAGS=-c -O2 -fPIC
-EXTRA_CXXFLAGS += -std=gnu++11
+CXXFLAGS= -std=gnu++11
 
 # build omega2Gpio executable when user executes "make"
 SOURCES=$(shell find -name "*.cpp" | sed s:./:: | tr "\n" " ")
@@ -20,7 +20,7 @@ $(TARGET): $(OBJECTS)
 
 # Compile sources
 build/%.o: ./source/%.cpp
-	$(CXX) $(CCFLAGS) $(INC) $< -o $@
+	$(CXX) $(CXXFLAGS) $(CCFLAGS) $(INC) $< -o $@
 
 # Remove all created files
 clean:
