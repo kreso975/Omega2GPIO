@@ -2,7 +2,7 @@ CCFLAGS=-c -O2 -fPIC
 
 # build omega2Gpio executable when user executes "make"
 SOURCES=$(shell find -name "*.cpp" | sed s:./:: | tr "\n" " ")
-OBJECTS=$(patsubst %.cpp,%.o,$(SOURCE))
+OBJECTS=$(patsubst %.cpp,%.o,$(SOURCES))
 
 # Includes and libraries
 INC=-I ./header
