@@ -8,7 +8,7 @@ OBJECTS=$(patsubst %.cpp,%.o,$(SOURCE))
 INC=-I ./header
 
 # Main build target
-TARGET=omega2Gpio
+TARGET=Omega2Gpio
 
 # Default target - build everything
 all: precomp $(TARGET)

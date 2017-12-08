@@ -1,5 +1,5 @@
 ##############################################
-# OpenWrt Makefile for omega2Gpio program
+# OpenWrt Makefile for Omega2Gpio program
 #
 #
 # Most of the variables used here are defined in
@@ -19,7 +19,7 @@
 include $(TOPDIR)/rules.mk
 
 # Name and release number of this package
-PKG_NAME:=omega2Gpio
+PKG_NAME:=Omega2Gpio
 PKG_VERSION:=0.0.1
 PKG_RELEASE:=1
 
@@ -32,14 +32,14 @@ include $(INCLUDE_DIR)/package.mk
 
 # Specify package information for this program.
 # The variables defined here should be self explanatory.
-define Package/omega2Gpio
+define Package/Omega2Gpio
 	SECTION:=utils
 	CATEGORY:=Utilities
-	TITLE:=omega2Gpio -- direct access
+	TITLE:=Omega2Gpio -- direct access
 	DEPENDS:=+libstdcpp
 endef
 
-define Package/omega2Gpio/description
+define Package/Omega2Gpio/description
 	App for controling GPIO's on Omega2
 endef
 
@@ -51,8 +51,8 @@ endef
 # much easier to do it this way.
 define Build/Prepare
 	mkdir -p $(PKG_BUILD_DIR)
-	$(CP) ./sources/* $(PKG_BUILD_DIR)/
-	$(CP) ./headers/* $(PKG_BUILD_DIR)/
+	$(CP) ./source/* $(PKG_BUILD_DIR)/
+	$(CP) ./header/* $(PKG_BUILD_DIR)/
 endef
 
 # We do not need to define Build/Configure or Build/Compile directives
@@ -66,13 +66,13 @@ endef
 # directory if it does not already exist.  Likewise $(INSTALL_BIN) contains the
 # command to copy the binary file from its current location (in our case the bu$
 # directory) to the install directory.
-define Package/omega2Gpio/install
+define Package/Omega2Gpio/install
 	$(INSTALL_DIR) $(1)/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/omega2Gpio $(1)/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/Omega2Gpio $(1)/bin/
 endef
 
 # This line executes the necessary commands to compile our program.
 # The above define directives specify all the information needed, but this
 # line calls BuildPackage which in turn actually uses this information to
 # build a package.
-$(eval $(call BuildPackage,omega2Gpio))
+$(eval $(call BuildPackage,Omega2Gpio))
