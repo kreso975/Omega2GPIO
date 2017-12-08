@@ -1,4 +1,4 @@
-#include <gpio.h>
+#include "gpio.h"
 
 uint16_t Gpio::controlOffset;
 uint16_t Gpio::dataOffset;

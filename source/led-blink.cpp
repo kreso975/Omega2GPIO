@@ -1,6 +1,6 @@
 #include <iostream>
 #include <unistd.h>
-#include <gpio.h>
+#include "gpio.h"
 
 const uint8_t LED_PIN = 3;
 
