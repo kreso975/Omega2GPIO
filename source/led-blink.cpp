@@ -83,6 +83,8 @@ int main( int argc, char* argv[] )
             std::chrono::microseconds two_microseconds{2};
             std::chrono::microseconds ten_microseconds{10};
 
+            auto pulse_start, pulse_end;
+
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
             Gpio::pinMode( ECHO_PIN, GPD_INPUT );
@@ -97,10 +99,10 @@ int main( int argc, char* argv[] )
                 Gpio::digitalWrite( TRIG_PIN, false );
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 0 )              // Check whether the ECHO is LOW
-                    auto pulse_start = Clock::now();                    // Saves the last known time of LOW pulse
+                    pulse_start = Clock::now();                    // Saves the last known time of LOW pulse
 
-                while ( Gpio::digitalRead(ECHO_PIN) == 1 )  // Check whether the ECHO is HIGH
-                    auto pulse_end = Clock::now();                // Saves the last known time of HIGH pulse
+                while ( Gpio::digitalRead(ECHO_PIN) == 1 )          // Check whether the ECHO is HIGH
+                    pulse_end = Clock::now();                // Saves the last known time of HIGH pulse
 
 
                 std::cout << "Delta pulse_end-pulse_start: "
@@ -110,7 +112,7 @@ int main( int argc, char* argv[] )
                 auto pulse_duration = pulse_end - pulse_start;   // Get pulse duration to a variable
 
                 float distance = pulse_duration * 17150;          // Multiply pulse duration by 17150 to get distance
-                distance = round(distance, 2);              // Round to two decimal points
+                distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
 
                 if ( ( distance > 2 ) && ( distance < 400 ) )   // Check whether the distance is within range
                     printf ( "Distance: %4.2f cm \n", distance - 0.5); // Print distance with 0.5 cm calibration
