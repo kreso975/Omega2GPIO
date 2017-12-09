@@ -85,6 +85,8 @@ int main( int argc, char* argv[] )
             std::chrono::microseconds two_microseconds{2};
             std::chrono::microseconds ten_microseconds{10};
 
+            double pulseStart, pulseEnd;
+
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
             Gpio::pinMode( ECHO_PIN, GPD_INPUT );
@@ -110,9 +112,9 @@ int main( int argc, char* argv[] )
                           << pulse_duration.count()
                           << " microseconds\n" << std::endl;
 
-                float pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
+                double pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
 
-                float distance = pulse_duration * 17150;          // Multiply pulse duration by 17150 to get distance
+                double distance = pulse_duration * 17150;          // Multiply pulse duration by 17150 to get distance
                 distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
 
                 if ( ( distance > 2 ) && ( distance < 400 ) )   // Check whether the distance is within range
