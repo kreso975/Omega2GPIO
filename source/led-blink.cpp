@@ -2,14 +2,11 @@
 #include <unistd.h>
 #include <string>
 #include <math.h>
-#include <ctime>
+#include <ctime.h>
 #include "gpio.h"
 #include <chrono>
 #include <thread>
-
-using namespace std::chrono;
-
-typedef high_resolution_clock Clock;
+typedef std::chrono::high_resolution_clock Clock;
 
 const uint8_t LED_PIN = 3;          // Test pin - LED light
 
@@ -101,15 +98,14 @@ int main( int argc, char* argv[] )
                 Gpio::digitalWrite( TRIG_PIN, false );
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 0 )              // Check whether the ECHO is LOW
-                    Clock::time_point pulseStart = Clock::now(); // Saves the last known time of LOW pulse
+                    Clock::time_point pulseStart = Clock::now();        // Saves the last known time of LOW pulse
 
-                while ( Gpio::digitalRead(ECHO_PIN) == 1 )          // Check whether the ECHO is HIGH
-                    Clock::time_point pulseEnd = Clock::now();  // Saves the last known time of HIGH pulse
+                while ( Gpio::digitalRead(ECHO_PIN) == 1 )              // Check whether the ECHO is HIGH
+                    Clock::time_point pulseEnd = Clock::now();          // Saves the last known time of HIGH pulse
 
-                duration<double> pulse_duration = duration_cast<duration<double>>(pulseEnd - pulseStart);
 
                 std::cout << "Delta pulse_end-pulse_start: "
-                          << pulse_duration.count()
+                          << std::chrono::duration_cast<std::chrono::microseconds>(pulseEnd - pulseStart).count()
                           << " microseconds\n" << std::endl;
 
                 double pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
