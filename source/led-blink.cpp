@@ -7,9 +7,6 @@
 #include <chrono>
 #include <thread>
 typedef std::chrono::high_resolution_clock Clock;
-typedef std::chrono::high_resolution_clock::time_point pulse_start;
-typedef std::chrono::high_resolution_clock::time_point pulse_end;
-
 
 const uint8_t LED_PIN = 3;          // Test pin - LED light
 
@@ -99,17 +96,17 @@ int main( int argc, char* argv[] )
                 Gpio::digitalWrite( TRIG_PIN, false );
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 0 )              // Check whether the ECHO is LOW
-                   auto pulse_start = Clock::now();                    // Saves the last known time of LOW pulse
+                    std::chrono::high_resolution_clock::time_point pulse_start = Clock::now(); // Saves the last known time of LOW pulse
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 1 )          // Check whether the ECHO is HIGH
-                   auto pulse_end = Clock::now();                // Saves the last known time of HIGH pulse
+                    std::chrono::high_resolution_clock::time_point pulse_end = Clock::now();                // Saves the last known time of HIGH pulse
 
 
                 std::cout << "Delta pulse_end-pulse_start: "
-                          << std::chrono::duration_cast<std::chrono::microseconds>(pulse_end - pulse_start).count()
+                          << std::chrono::duration_cast<std::chrono::microseconds>(pulse_end-pulse_start).count()
                           << " microseconds\n" << std::endl;
 
-                auto pulse_duration = pulse_end - pulse_start;   // Get pulse duration to a variable
+                float pulse_duration = pulse_end - pulse_start;   // Get pulse duration to a variable
 
                 float distance = pulse_duration * 17150;          // Multiply pulse duration by 17150 to get distance
                 distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
