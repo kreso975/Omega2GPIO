@@ -83,8 +83,6 @@ int main( int argc, char* argv[] )
             microseconds two_microseconds{2};
             microseconds ten_microseconds{10};
 
-            const auto pulseStart, pulseEnd;
-
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
             Gpio::pinMode( ECHO_PIN, GPD_INPUT );
