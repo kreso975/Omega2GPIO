@@ -1,9 +1,15 @@
 #include <iostream>
 #include <unistd.h>
 #include <string>
+#include <time.h>
 #include "gpio.h"
 
-const uint8_t LED_PIN = 3;
+const uint8_t LED_PIN = 3;          // Test pin - LED light
+
+const uint8_t TRIG_PIN = 6;         // Associate pin 9 to TRIG
+const uint8_t ECHO_PIN = 1;         // Associate pin 8 to ECHO
+
+
 
 static void show_usage( std::string argv )
 {
@@ -61,6 +67,40 @@ int main( int argc, char* argv[] )
             {
                 show_usage(argv[0]); // Show help - no String
                 return 1;
+            }
+
+        }
+        else if ( ( arg == "-t" ) && ( arg[3] == "-e" ) )
+        {
+            // TODO use arg values for GPIO PINs
+            Gpio::pinMode( LED_TRIG, GPD_OUTPUT );
+            Gpio::pinMode( LED_ECHO, GPD_INPUT );
+
+            while ( true )
+            {
+                Gpio::digitalWrite( LED_TRIG, false );
+                time.sleep(2);                              // Delay of 2 seconds
+
+                Gpio::digitalWrite( LED_TRIG, true );
+                time.sleep(0.00001);                        // Delay of 0.00001 seconds
+                Gpio::digitalWrite( LED_TRIG, false );
+
+                while ( Gpio::digitalRead(LED_ECHO) == 0 )  // Check whether the ECHO is LOW
+                    int pulse_start = time.time();              // Saves the last known time of LOW pulse
+
+                while ( Gpio::digitalRead(LED_ECHO) == 1 )  // Check whether the ECHO is HIGH
+                    int pulse_end = time.time();                // Saves the last known time of HIGH pulse
+
+                int pulse_duration = pulse_end - pulse_start;   // Get pulse duration to a variable
+
+                int distance = pulse_duration * 17150;          // Multiply pulse duration by 17150 to get distance
+                distance = round(distance, 2);              // Round to two decimal points
+
+                if ( ( distance > 2 ) && ( distance < 400 ) )   // Check whether the distance is within range
+                    printf ( "Distance: %4.2f cm \n", distance - 0.5); // Print distance with 0.5 cm calibration
+                else
+                    printf ( "Out Of Range \n" );                       //display out of range
+
             }
 
         }
