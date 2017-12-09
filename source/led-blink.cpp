@@ -34,6 +34,8 @@ int main( int argc, char* argv[] )
         Gpio::initialize();
 
         std::string arg = argv[1];
+        std::string arg3 = argv[3];
+
         if ( ( arg == "-h" ) || ( arg == "--help" ) )
             show_usage(argv[0]); // Show help
 
@@ -74,7 +76,7 @@ int main( int argc, char* argv[] )
             }
 
         }
-        else if ( ( arg == "-t" ) && ( arg[3] == "-e" ) )
+        else if ( ( arg == "-t" ) && ( arg3 == "-e" ) )
         {
             // HC-SR04
             // TODO use arg values for GPIO PINs
