@@ -3,6 +3,10 @@
 #include <string>
 #include <time.h>
 #include "gpio.h"
+#include <chrono>
+#include <thread>
+typedef std::chrono::high_resolution_clock Clock;
+
 
 const uint8_t LED_PIN = 3;          // Test pin - LED light
 
@@ -36,7 +40,7 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-p" ) || ( arg == "--pin" ) )
         {
             // set the pin mode to output, so that we can digitalWrite() it
-            Gpio::pinMode( argv[2], GPD_OUTPUT );
+            Gpio::pinMode( (int) argv[2], GPD_OUTPUT );
         }
         else if ( ( arg == "-c" ) || ( arg == "--command" ) )
         {
@@ -72,6 +76,7 @@ int main( int argc, char* argv[] )
         }
         else if ( ( arg == "-t" ) && ( arg[3] == "-e" ) )
         {
+            // HC-SR04
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( LED_TRIG, GPD_OUTPUT );
             Gpio::pinMode( LED_ECHO, GPD_INPUT );
@@ -79,21 +84,26 @@ int main( int argc, char* argv[] )
             while ( true )
             {
                 Gpio::digitalWrite( LED_TRIG, false );
-                time.sleep(2);                              // Delay of 2 seconds
+                nanosleep(2000);                                        // Delay of 2 microseconds
 
                 Gpio::digitalWrite( LED_TRIG, true );
-                time.sleep(0.00001);                        // Delay of 0.00001 seconds
+                nanosleep(10000);                                       // Delay of 10 microseconds
                 Gpio::digitalWrite( LED_TRIG, false );
 
-                while ( Gpio::digitalRead(LED_ECHO) == 0 )  // Check whether the ECHO is LOW
-                    int pulse_start = time.time();              // Saves the last known time of LOW pulse
+                while ( Gpio::digitalRead(LED_ECHO) == 0 )              // Check whether the ECHO is LOW
+                    auto pulse_start = Clock::now();                    // Saves the last known time of LOW pulse
 
                 while ( Gpio::digitalRead(LED_ECHO) == 1 )  // Check whether the ECHO is HIGH
-                    int pulse_end = time.time();                // Saves the last known time of HIGH pulse
+                    auto pulse_end = Clock::now();                // Saves the last known time of HIGH pulse
 
-                int pulse_duration = pulse_end - pulse_start;   // Get pulse duration to a variable
 
-                int distance = pulse_duration * 17150;          // Multiply pulse duration by 17150 to get distance
+                std::cout << "Delta pulse_end-pulse_start: "
+                          << std::chrono::duration_cast<std::chrono::milliseconds>(pulse_end - pulse_start).count()
+                          << " milliseconds\n" << std::endl;
+
+                auto pulse_duration = pulse_end - pulse_start;   // Get pulse duration to a variable
+
+                float distance = pulse_duration * 17150;          // Multiply pulse duration by 17150 to get distance
                 distance = round(distance, 2);              // Round to two decimal points
 
                 if ( ( distance > 2 ) && ( distance < 400 ) )   // Check whether the distance is within range
