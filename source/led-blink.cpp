@@ -1,7 +1,7 @@
 #include <iostream>
-#include <unistd>
+#include <unistd.h>
 #include <string>
-#include <math>
+#include <math.h>
 #include <time.h>
 #include "gpio.h"
 #include <chrono>
