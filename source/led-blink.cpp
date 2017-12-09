@@ -80,22 +80,22 @@ int main( int argc, char* argv[] )
         {
             // HC-SR04
             // TODO use arg values for GPIO PINs
-            Gpio::pinMode( LED_TRIG, GPD_OUTPUT );
-            Gpio::pinMode( LED_ECHO, GPD_INPUT );
+            Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
+            Gpio::pinMode( ECHO_PIN, GPD_INPUT );
 
             while ( true )
             {
-                Gpio::digitalWrite( LED_TRIG, false );
+                Gpio::digitalWrite( TRIG_PIN, false );
                 nanosleep(2000);                                        // Delay of 2 microseconds
 
-                Gpio::digitalWrite( LED_TRIG, true );
+                Gpio::digitalWrite( TRIG_PIN, true );
                 nanosleep(10000);                                       // Delay of 10 microseconds
-                Gpio::digitalWrite( LED_TRIG, false );
+                Gpio::digitalWrite( TRIG_PIN, false );
 
-                while ( Gpio::digitalRead(LED_ECHO) == 0 )              // Check whether the ECHO is LOW
+                while ( Gpio::digitalRead(ECHO_PIN) == 0 )              // Check whether the ECHO is LOW
                     auto pulse_start = Clock::now();                    // Saves the last known time of LOW pulse
 
-                while ( Gpio::digitalRead(LED_ECHO) == 1 )  // Check whether the ECHO is HIGH
+                while ( Gpio::digitalRead(ECHO_PIN) == 1 )  // Check whether the ECHO is HIGH
                     auto pulse_end = Clock::now();                // Saves the last known time of HIGH pulse
 
 
