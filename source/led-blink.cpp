@@ -79,6 +79,9 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-t" ) && ( arg3 == "-e" ) )
         {
             // HC-SR04
+            std::chrono::microseconds two_microseconds{2};
+            std::chrono::microseconds ten_microseconds{10};
+
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
             Gpio::pinMode( ECHO_PIN, GPD_INPUT );
@@ -86,22 +89,22 @@ int main( int argc, char* argv[] )
             while ( true )
             {
                 Gpio::digitalWrite( TRIG_PIN, false );
-                nanosleep(2000);                                        // Delay of 2 microseconds
+                std::this_thread::sleep_for(two_microseconds);          // Delay of 2 microseconds
 
                 Gpio::digitalWrite( TRIG_PIN, true );
-                nanosleep(10000);                                       // Delay of 10 microseconds
+                std::this_thread::sleep_for(ten_microseconds);          // Delay of 10 microseconds
                 Gpio::digitalWrite( TRIG_PIN, false );
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 0 )              // Check whether the ECHO is LOW
-                    auto pulse_start = Clock::now();                    // Saves the last known time of LOW pulse
+                    long pulse_start = Clock::now();                    // Saves the last known time of LOW pulse
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 1 )  // Check whether the ECHO is HIGH
-                    auto pulse_end = Clock::now();                // Saves the last known time of HIGH pulse
+                    long pulse_end = Clock::now();                // Saves the last known time of HIGH pulse
 
 
                 std::cout << "Delta pulse_end-pulse_start: "
-                          << std::chrono::duration_cast<std::chrono::milliseconds>(pulse_end - pulse_start).count()
-                          << " milliseconds\n" << std::endl;
+                          << std::chrono::duration_cast<std::chrono::microseconds>(pulse_end - pulse_start).count()
+                          << " microseconds\n" << std::endl;
 
                 auto pulse_duration = pulse_end - pulse_start;   // Get pulse duration to a variable
 
