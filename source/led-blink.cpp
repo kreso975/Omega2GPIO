@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <string>
 #include <math.h>
-#include <ctime.h>
+#include <ctime>
 #include "gpio.h"
 #include <chrono>
 #include <thread>
