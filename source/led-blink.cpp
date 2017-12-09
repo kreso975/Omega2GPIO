@@ -6,6 +6,7 @@
 #include "gpio.h"
 #include <chrono>
 #include <thread>
+using namespace std::chrono;
 typedef std::chrono::high_resolution_clock Clock;
 
 const uint8_t LED_PIN = 3;          // Test pin - LED light
@@ -79,8 +80,8 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-t" ) && ( arg3 == "-e" ) )
         {
             // HC-SR04
-            std::chrono::microseconds two_microseconds{2};
-            std::chrono::microseconds ten_microseconds{10};
+            microseconds two_microseconds{2};
+            microseconds ten_microseconds{10};
 
             const auto pulseStart, pulseEnd;
 
@@ -103,12 +104,13 @@ int main( int argc, char* argv[] )
                 while ( Gpio::digitalRead(ECHO_PIN) == 1 )              // Check whether the ECHO is HIGH
                     Clock::time_point pulseEnd = Clock::now();          // Saves the last known time of HIGH pulse
 
+                auto pulse_duration = duration_cast<microseconds>(pulseEnd - pulseStart);   // Get pulse duration to a variable
 
                 std::cout << "Delta pulse_end-pulse_start: "
-                          << std::chrono::duration_cast<std::chrono::microseconds>(pulseEnd - pulseStart).count()
+                          << pulse_duration
                           << " microseconds\n" << std::endl;
 
-                float pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
+
 
                 float distance = pulse_duration * 17150;          // Multiply pulse duration by 17150 to get distance
                 distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
