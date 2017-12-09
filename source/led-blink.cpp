@@ -97,10 +97,10 @@ int main( int argc, char* argv[] )
                 Gpio::digitalWrite( TRIG_PIN, false );
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 0 )              // Check whether the ECHO is LOW
-                    Clock::time_point auto pulseStart = Clock::now();        // Saves the last known time of LOW pulse
+                   auto pulseStart = Clock::time_point<Clock::now();        // Saves the last known time of LOW pulse
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 1 )              // Check whether the ECHO is HIGH
-                    Clock::time_point auto pulseEnd = Clock::now();          // Saves the last known time of HIGH pulse
+                   auto pulseEnd = Clock::time_point<Clock::now();          // Saves the last known time of HIGH pulse
 
                 auto pulse_duration = duration_cast<microseconds>(pulseEnd - pulseStart);   // Get pulse duration to a variable
 
