@@ -1,6 +1,7 @@
 #include <iostream>
-#include <unistd.h>
+#include <unistd>
 #include <string>
+#include <math>
 #include <time.h>
 #include "gpio.h"
 #include <chrono>
@@ -96,10 +97,10 @@ int main( int argc, char* argv[] )
                 Gpio::digitalWrite( TRIG_PIN, false );
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 0 )              // Check whether the ECHO is LOW
-                    long pulse_start = Clock::now();                    // Saves the last known time of LOW pulse
+                    auto pulse_start = Clock::now();                    // Saves the last known time of LOW pulse
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 1 )  // Check whether the ECHO is HIGH
-                    long pulse_end = Clock::now();                // Saves the last known time of HIGH pulse
+                    auto pulse_end = Clock::now();                // Saves the last known time of HIGH pulse
 
 
                 std::cout << "Delta pulse_end-pulse_start: "
