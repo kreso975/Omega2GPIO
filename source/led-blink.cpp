@@ -7,6 +7,8 @@
 #include <chrono>
 #include <thread>
 typedef std::chrono::high_resolution_clock Clock;
+std::chrono::high_resolution_clock::time_point pulse_start;
+std::chrono::high_resolution_clock::time_point pulse_end;
 
 
 const uint8_t LED_PIN = 3;          // Test pin - LED light
