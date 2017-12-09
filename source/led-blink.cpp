@@ -30,14 +30,14 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-p" ) || ( arg == "--pin" ) )
         {
             // set the pin mode to output, so that we can digitalWrite() it
-            Gpio::pinMode(LED_PIN, GPD_OUTPUT);
+            Gpio::pinMode( argv[2], GPD_OUTPUT );
         }
         else if ( ( arg == "-c" ) || ( arg == "--command" ) )
         {
             if ( argv[2] == "blink" )
             {
                 // set the pin mode to output, so that we can digitalWrite() it
-                Gpio::pinMode(LED_PIN, GPD_OUTPUT);
+                Gpio::pinMode( LED_PIN, GPD_OUTPUT );
 
                 // by the default our led is set to be on
                 bool ledStatus = true;
