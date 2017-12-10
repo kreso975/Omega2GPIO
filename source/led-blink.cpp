@@ -40,6 +40,17 @@ int main( int argc, char* argv[] )
         if ( ( arg == "-h" ) || ( arg == "--help" ) )
             show_usage(argv[0]); // Show help
 
+        else if ( ( arg == "-test" )  )
+        {
+            std::chrono::microseconds ten_microseconds{10};
+            clock_t t;
+
+            t = clock();
+            std::this_thread::sleep_for(ten_microseconds);
+
+            t = ( clock() - t ) * 1000;
+            printf ( t );
+        }
         else if ( ( arg == "-p" ) || ( arg == "--pin" ) )
         {
             // set the pin mode to output, so that we can digitalWrite() it
