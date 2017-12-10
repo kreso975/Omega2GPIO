@@ -44,15 +44,17 @@ int main( int argc, char* argv[] )
         {
             std::chrono::microseconds ten_microseconds{20};
             clock_t t, t2, t3;
+            unsigned int usecs;
 
             t = clock();
-            printf ( "Vrijeme 1; %Lf", (long double)t );
+            usleep(usecs);
 
-            std::this_thread::sleep_for(ten_microseconds);
+            //std::this_thread::sleep_for(ten_microseconds);
 
             t2 = clock();
 
             t3 = ( t2 - t ) * 1000;
+            printf ( "Vrijeme 1; %Lf", (long double)t );
             printf ( "Vrijeme 2; %Lf", (long double)t2 );
 
 
