@@ -100,8 +100,6 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-t" ) && ( arg3 == "-e" ) )
         {
             // HC-SR04
-            std::chrono::seconds two_seconds{1};
-            std::chrono::microseconds ten_microseconds{10};
 
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
@@ -110,9 +108,9 @@ int main( int argc, char* argv[] )
             while ( true )
             {
                 Gpio::digitalWrite( TRIG_PIN, false );
-                std::this_thread::sleep_for(two_seconds);          // Delay of 2 seconds
+                std::this_thread::sleep_for(seconds(1));          // Delay of 2 seconds
                 Gpio::digitalWrite( TRIG_PIN, true );
-                std::this_thread::sleep_for(ten_microseconds);     // Delay of 10 microseconds
+                std::this_thread::sleep_for(microseconds{10});     // Delay of 10 microseconds
                 Gpio::digitalWrite( TRIG_PIN, false );
 
                 Clock::time_point pulseStart = Clock::now();
@@ -132,7 +130,7 @@ int main( int argc, char* argv[] )
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
 
 
-                double distance = (double)pulseDuration * 17150;          // Multiply pulse duration by 17150 to get distance
+                float distance = (double) pulseDuration * 17150;          // Multiply pulse duration by 17150 to get distance
                 distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
 
                 /*
