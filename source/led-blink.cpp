@@ -48,7 +48,7 @@ int main( int argc, char* argv[] )
 
             std::this_thread::sleep_for(ten_microseconds);
 
-            printf ( "Vrijeme 1; %Lf", (long double)pulseStart );
+            printf ( "Vrijeme 1; %Lf", (double)pulseStart );
 
         }
         else if ( ( arg == "-p" ) || ( arg == "--pin" ) )
@@ -94,8 +94,8 @@ int main( int argc, char* argv[] )
             std::chrono::microseconds two_microseconds{2};
             std::chrono::microseconds ten_microseconds{10};
 
-            //const auto pulseStart, pulseEnd;
-            clock_t t;
+            auto pulseStart, pulseEnd;
+
 
 
             // TODO use arg values for GPIO PINs
@@ -120,8 +120,6 @@ int main( int argc, char* argv[] )
 
                // duration<double> time_span = duration_cast<duration<double>>(pulseEnd - pulseStart);
 
-                std::cout << "It took me " << t << " microseconds.";
-                std::cout << std::endl;
 
                 /*
                 std::cout << "Delta pulse_end-pulse_start: "
