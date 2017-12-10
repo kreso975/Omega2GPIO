@@ -9,6 +9,7 @@
 using namespace std::chrono;
 typedef std::chrono::high_resolution_clock Clock;
 
+
 const uint8_t LED_PIN = 6;          // Test pin - LED light
 
 const uint8_t TRIG_PIN = 3;         // Associate pin 9 to TRIG
@@ -42,11 +43,9 @@ int main( int argc, char* argv[] )
 
         else if ( ( arg == "-test" )  )
         {
-            std::chrono::microseconds ten_microseconds{50};
-
             high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
-            std::this_thread::sleep_for(ten_microseconds);
+            std::this_thread::sleep_for(microseconds{10});
 
             high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
@@ -97,6 +96,7 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-t" ) && ( arg3 == "-e" ) )
         {
             // HC-SR04
+            typedef std::chrono::duration<float, std::milli> duration;
 
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
@@ -121,10 +121,12 @@ int main( int argc, char* argv[] )
                     Clock::time_point pulseEnd = Clock::now();      // Saves the last known time of HIGH pulse
 
                //duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
+                auto dur = pulseEnd - pulseStart;
 
                 std::cout << "Delta pulse_end-pulse_start: "
                          // << pulseDuration.count()
                           << duration_cast<milliseconds>(pulseEnd - pulseStart).count()
+                          << std::chrono::duration_cast<std::chrono::duration<float>>(dur).count()
                           << " microseconds\n" << std::endl;
 
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
