@@ -112,11 +112,11 @@ int main( int argc, char* argv[] )
 
                 Gpio::digitalWrite( TRIG_PIN, false );
 
-                Clock::time_point pulseStart = Clock::now();
+                //Clock::time_point pulseStart = Clock::now();
                 while ( Gpio::digitalRead(ECHO_PIN) == 0 )          // Check whether the ECHO is LOW
                     Clock::time_point pulseStart = Clock::now();    // Saves the last known time of LOW pulse
 
-                Clock::time_point pulseEnd = Clock::now();
+                //Clock::time_point pulseEnd = Clock::now();
                 while ( Gpio::digitalRead(ECHO_PIN) == 1 )          // Check whether the ECHO is HIGH
                     Clock::time_point pulseEnd = Clock::now();      // Saves the last known time of HIGH pulse
 
