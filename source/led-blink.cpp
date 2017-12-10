@@ -111,12 +111,12 @@ int main( int argc, char* argv[] )
             {
                 //bool ledStatus = false;
                 Gpio::digitalWrite( TRIG_PIN, false );
-                //std::this_thread::sleep_for(two_microseconds);          // Delay of 2 microseconds
-                usleep(2 * 1000);
+                std::this_thread::sleep_for(two_microseconds);          // Delay of 2 microseconds
+                //usleep(2 * 1000);
                 //ledStatus = true;
                 Gpio::digitalWrite( TRIG_PIN, true );
-                //std::this_thread::sleep_for(ten_microseconds);          // Delay of 10 microseconds
-                usleep(10 * 1000);
+                std::this_thread::sleep_for(ten_microseconds);          // Delay of 10 microseconds
+                //usleep(10 * 1000);
                 //ledStatus = false;
                 Gpio::digitalWrite( TRIG_PIN, false );
 
