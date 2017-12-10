@@ -115,11 +115,11 @@ int main( int argc, char* argv[] )
                 Clock::time_point pulseStart = Clock::now();
 
 
-                while ( Gpio::digitalRead(ECHO_PIN) == 0 )          // Check whether the ECHO is LOW
+                while ( Gpio::digitalRead(ECHO_PIN) == 0 )  {}        // Check whether the ECHO is LOW
                     //Clock::time_point pulseStart = Clock::now();    // Saves the last known time of LOW pulse
 
                 Clock::time_point pulseEnd = Clock::now();
-                while ( Gpio::digitalRead(ECHO_PIN) == 1 )          // Check whether the ECHO is HIGH
+                while ( Gpio::digitalRead(ECHO_PIN) == 1 )  {}        // Check whether the ECHO is HIGH
                     //Clock::time_point pulseEnd = Clock::now();      // Saves the last known time of HIGH pulse
 
                //duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
