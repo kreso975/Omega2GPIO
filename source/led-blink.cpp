@@ -50,9 +50,7 @@ int main( int argc, char* argv[] )
 
             high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
-            std::cout << "It took me " << t1 << " seconds.\n";
-            std::cout << "It took me 2" << t2 << " seconds.\n";
-            std::cout << std::endl;
+
 
 
             //printf ( "Vrijeme 1; %Lf", pulseStart );
