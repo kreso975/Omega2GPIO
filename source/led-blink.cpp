@@ -48,7 +48,7 @@ int main( int argc, char* argv[] )
 
             std::this_thread::sleep_for(ten_microseconds);
 
-            printf ( "Vrijeme 1; %Lf", (double)pulseStart );
+            printf ( "Vrijeme 1; %Lf", pulseStart );
 
         }
         else if ( ( arg == "-p" ) || ( arg == "--pin" ) )
