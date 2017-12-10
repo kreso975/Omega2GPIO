@@ -126,7 +126,7 @@ int main( int argc, char* argv[] )
 
                 std::cout << "Delta pulse_end-pulse_start: "
                          // << pulseDuration.count()
-                          << duration_cast<microseconds>(pulseEnd - pulseStart).count()
+                          << duration_cast<miliseconds>(pulseEnd - pulseStart).count()
                           << " microseconds\n" << std::endl;
 
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
