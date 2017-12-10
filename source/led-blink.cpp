@@ -9,7 +9,7 @@
 using namespace std::chrono;
 typedef std::chrono::high_resolution_clock Clock;
 
-const uint8_t LED_PIN = 3;          // Test pin - LED light
+const uint8_t LED_PIN = 7;          // Test pin - LED light
 
 const uint8_t TRIG_PIN = 7;         // Associate pin 9 to TRIG
 const uint8_t ECHO_PIN = 6;         // Associate pin 8 to ECHO
@@ -109,15 +109,15 @@ int main( int argc, char* argv[] )
 
             while ( true )
             {
-                bool ledStatus = true;
+                bool ledStatus = false;
                 Gpio::digitalWrite( TRIG_PIN, ledStatus );
                 //std::this_thread::sleep_for(two_microseconds);          // Delay of 2 microseconds
                 usleep(2 * 1000);
-                ledStatus = false;
+                ledStatus = true;
                 Gpio::digitalWrite( TRIG_PIN, ledStatus );
                 //std::this_thread::sleep_for(ten_microseconds);          // Delay of 10 microseconds
                 usleep(10 * 1000);
-                ledStatus = true;
+                ledStatus = false;
                 Gpio::digitalWrite( TRIG_PIN, ledStatus );
 
                 Clock::time_point pulseStart = Clock::now();
