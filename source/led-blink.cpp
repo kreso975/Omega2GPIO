@@ -11,8 +11,8 @@ typedef std::chrono::high_resolution_clock Clock;
 
 const uint8_t LED_PIN = 3;          // Test pin - LED light
 
-const uint8_t TRIG_PIN = 6;         // Associate pin 9 to TRIG
-const uint8_t ECHO_PIN = 1;         // Associate pin 8 to ECHO
+const uint8_t TRIG_PIN = 7;         // Associate pin 9 to TRIG
+const uint8_t ECHO_PIN = 6;         // Associate pin 8 to ECHO
 
 
 
@@ -99,12 +99,8 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-t" ) && ( arg3 == "-e" ) )
         {
             // HC-SR04
-            std::chrono::microseconds two_microseconds{2};
-            std::chrono::microseconds ten_microseconds{10};
-
-            //auto pulseStart, pulseEnd;
-
-
+            std::chrono::microseconds two_microseconds{20};
+            std::chrono::microseconds ten_microseconds{100};
 
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
@@ -119,27 +115,26 @@ int main( int argc, char* argv[] )
                 std::this_thread::sleep_for(ten_microseconds);          // Delay of 10 microseconds
                 Gpio::digitalWrite( TRIG_PIN, 0 );
 
-                high_resolution_clock::time_point pulseStart = high_resolution_clock::now();
+                Clock::time_point pulseStart = Clock::now();
                 while ( Gpio::digitalRead(ECHO_PIN) == 0 )              // Check whether the ECHO is LOW
                 {
                     // Saves the last known time of LOW pulse
-                    high_resolution_clock::time_point pulseStart = high_resolution_clock::now();
+                    Clock::time_point pulseStart = Clock::now();
                     printf("U 1. sam While-u");
                 }
 
 
-                high_resolution_clock::time_point pulseEnd = high_resolution_clock::now();
+                Clock::time_point pulseEnd = Clock::now();
                 while ( Gpio::digitalRead(ECHO_PIN) == 1 )              // Check whether the ECHO is HIGH
                 {
                     // Saves the last known time of HIGH pulse
-                    high_resolution_clock::time_point pulseEnd = high_resolution_clock::now();
+                    Clock::time_point pulseEnd = Clock::now();
                     printf("U 2. sam While-u");
                 }
 
 
 
                duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
-
 
 
                 std::cout << "Delta pulse_end-pulse_start: "
