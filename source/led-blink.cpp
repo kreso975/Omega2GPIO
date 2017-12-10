@@ -100,7 +100,7 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-t" ) && ( arg3 == "-e" ) )
         {
             // HC-SR04
-            std::chrono::microseconds two_microseconds{2};
+            std::chrono::microseconds two_microseconds{2e6};
             std::chrono::microseconds ten_microseconds{10};
 
             // TODO use arg values for GPIO PINs
