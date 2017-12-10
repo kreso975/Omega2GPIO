@@ -44,7 +44,7 @@ int main( int argc, char* argv[] )
         {
             std::chrono::microseconds ten_microseconds{20};
             clock_t t, t2, t3;
-            unsigned int usecs;
+            unsigned int usecs = 20;
 
             t = clock();
             usleep(usecs);
