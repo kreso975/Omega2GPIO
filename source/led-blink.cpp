@@ -69,7 +69,7 @@ int main( int argc, char* argv[] )
             if ( argv[2] == "blink" )
             {
                 // set the pin mode to output, so that we can digitalWrite() it
-                Gpio::pinMode( LED_PIN, GPD_OUTPUT );
+                //Gpio::pinMode( LED_PIN, GPD_OUTPUT );
 
                 // by the default our led is set to be on
                 bool ledStatus = true;
@@ -78,7 +78,7 @@ int main( int argc, char* argv[] )
                 while ( counter <= 20 )
                 {
                     // toggle the pin
-                    Gpio::digitalWrite(LED_PIN, ledStatus);
+                    //Gpio::digitalWrite(LED_PIN, ledStatus);
 
                     // and wait 500 ms
                     usleep(500 * 1000);
