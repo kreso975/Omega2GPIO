@@ -100,7 +100,7 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-t" ) && ( arg3 == "-e" ) )
         {
             // HC-SR04
-            std::chrono::microseconds two_microseconds{2e6};
+            std::chrono::seconds two_seconds{2};
             std::chrono::microseconds ten_microseconds{10};
 
             // TODO use arg values for GPIO PINs
@@ -111,7 +111,7 @@ int main( int argc, char* argv[] )
             {
                 //bool ledStatus = false;
                 Gpio::digitalWrite( TRIG_PIN, false );
-                std::this_thread::sleep_for(two_microseconds);          // Delay of 2 microseconds
+                std::this_thread::sleep_for(two_seconds);          // Delay of 2 microseconds
                 //usleep(2 * 1000);
                 //ledStatus = true;
                 Gpio::digitalWrite( TRIG_PIN, true );
