@@ -100,7 +100,7 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-t" ) && ( arg3 == "-e" ) )
         {
             // HC-SR04
-            std::chrono::seconds two_seconds{2};
+            std::chrono::seconds two_seconds{1};
             std::chrono::microseconds ten_microseconds{10};
 
             // TODO use arg values for GPIO PINs
@@ -115,27 +115,15 @@ int main( int argc, char* argv[] )
                 std::this_thread::sleep_for(ten_microseconds);     // Delay of 10 microseconds
                 Gpio::digitalWrite( TRIG_PIN, false );
 
-                Clock::time_point pulseStart = null;
-                while ( Gpio::digitalRead(ECHO_PIN) == 0 )              // Check whether the ECHO is LOW
-                {
-                    // Saves the last known time of LOW pulse
-                    Clock::time_point pulseStart = Clock::now();
-                    //printf("U 1. sam While-u");
-                }
+                Clock::time_point pulseStart = Clock::now();
+                while ( Gpio::digitalRead(ECHO_PIN) == 0 )          // Check whether the ECHO is LOW
+                    Clock::time_point pulseStart = Clock::now();    // Saves the last known time of LOW pulse
 
-
-                Clock::time_point pulseEnd = null;
-                while ( Gpio::digitalRead(ECHO_PIN) == 1 )              // Check whether the ECHO is HIGH
-                {
-                    // Saves the last known time of HIGH pulse
-                    Clock::time_point pulseEnd = Clock::now();
-                    //printf("U 2. sam While-u");
-                }
-
-
+                Clock::time_point pulseEnd = Clock::now();
+                while ( Gpio::digitalRead(ECHO_PIN) == 1 )          // Check whether the ECHO is HIGH
+                    Clock::time_point pulseEnd = Clock::now();      // Saves the last known time of HIGH pulse
 
                duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
-
 
                 std::cout << "Delta pulse_end-pulse_start: "
                           << pulseDuration.count()
@@ -143,10 +131,11 @@ int main( int argc, char* argv[] )
 
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
 
-                /*
-                auto distance = pulseDuration * 17150;          // Multiply pulse duration by 17150 to get distance
+
+                double distance = pulseDuration * 17150;          // Multiply pulse duration by 17150 to get distance
                 distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
 
+                /*
                 if ( ( distance > 2 ) && ( distance < 400 ) )   // Check whether the distance is within range
                     printf ( "Distance: %4.2f cm \n", distance - 0.5); // Print distance with 0.5 cm calibration
                 else
