@@ -94,7 +94,7 @@ int main( int argc, char* argv[] )
             std::chrono::microseconds two_microseconds{2};
             std::chrono::microseconds ten_microseconds{10};
 
-            auto pulseStart, pulseEnd;
+            //auto pulseStart, pulseEnd;
 
 
 
@@ -128,7 +128,7 @@ int main( int argc, char* argv[] )
                 */
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
 
-                float distance = t * 17150;          // Multiply pulse duration by 17150 to get distance
+               // float distance = t * 17150;          // Multiply pulse duration by 17150 to get distance
                 distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
 
                 if ( ( distance > 2 ) && ( distance < 400 ) )   // Check whether the distance is within range
