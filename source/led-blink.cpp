@@ -43,19 +43,21 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-test" )  )
         {
             std::chrono::microseconds ten_microseconds{20};
-            clock_t t;
+            clock_t t, t2, t3;
 
             t = clock();
-            printf ( "Vrijeme 1; %ld", t );
+            printf ( "Vrijeme 1; %Lf", (long double)t );
 
             std::this_thread::sleep_for(ten_microseconds);
 
-            t = ( clock() - t ) * 1000;
-            printf ( "Vrijeme 2; %ld", t );
+            t2 = clock();
+
+            t3 = ( clock() - t ) * 1000;
+            printf ( "Vrijeme 2; %Lf", (long double)t2 );
 
 
 
-            printf ( "Vrijeme 3; %ld", t );
+            printf ( "Vrijeme 3; %Lf", (long double)t3 );
         }
         else if ( ( arg == "-p" ) || ( arg == "--pin" ) )
         {
