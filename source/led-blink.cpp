@@ -100,8 +100,8 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-t" ) && ( arg3 == "-e" ) )
         {
             // HC-SR04
-            std::chrono::microseconds two_microseconds{20};
-            std::chrono::microseconds ten_microseconds{100};
+            std::chrono::microseconds two_microseconds{2};
+            std::chrono::microseconds ten_microseconds{10};
 
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
@@ -109,15 +109,15 @@ int main( int argc, char* argv[] )
 
             while ( true )
             {
-                bool ledStatus = false;
+                bool ledStatus = true;
                 Gpio::digitalWrite( TRIG_PIN, ledStatus );
                 //std::this_thread::sleep_for(two_microseconds);          // Delay of 2 microseconds
                 usleep(2 * 1000);
-                ledStatus = true;
+                ledStatus = false;
                 Gpio::digitalWrite( TRIG_PIN, ledStatus );
                 //std::this_thread::sleep_for(ten_microseconds);          // Delay of 10 microseconds
                 usleep(10 * 1000);
-                ledStatus = false;
+                ledStatus = true;
                 Gpio::digitalWrite( TRIG_PIN, ledStatus );
 
                 Clock::time_point pulseStart = Clock::now();
