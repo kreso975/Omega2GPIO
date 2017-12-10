@@ -67,7 +67,7 @@ int main( int argc, char* argv[] )
         }
         else if ( ( arg == "-c" ) || ( arg == "--command" ) )
         {
-            if ( argv2 == "blink" )
+            if ( arg2 == "blink" )
             {
                 // set the pin mode to output, so that we can digitalWrite() it
                 Gpio::pinMode( LED_PIN, GPD_OUTPUT );
