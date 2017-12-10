@@ -51,9 +51,7 @@ int main( int argc, char* argv[] )
             high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
 
-            duration<double> time_span = duration_cast<seconds>(t2 - t1).count();
-
-            std::cout << "It took me " << time_span << " seconds.";
+            std::cout << "It took me " << duration_cast<seconds>(t2 - t1).count() << " seconds.";
             std::cout << std::endl;
 
             //printf ( "Vrijeme 1; %Lf", pulseStart );
