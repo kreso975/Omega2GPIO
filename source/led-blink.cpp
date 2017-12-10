@@ -113,7 +113,7 @@ int main( int argc, char* argv[] )
                 Gpio::digitalWrite( TRIG_PIN, false );
 
                 //Clock::time_point pulseStart = Clock::now();
-                duration pulseStart, pulseEnd;
+                duration<double> pulseStart, pulseEnd;
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 0 )          // Check whether the ECHO is LOW
                     Clock::time_point pulseStart = Clock::now();    // Saves the last known time of LOW pulse
