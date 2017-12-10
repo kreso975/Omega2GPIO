@@ -42,7 +42,7 @@ int main( int argc, char* argv[] )
 
         else if ( ( arg == "-test" )  )
         {
-            std::chrono::microseconds ten_microseconds{10};
+            std::chrono::microseconds ten_microseconds{50};
 
             high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
