@@ -52,7 +52,7 @@ int main( int argc, char* argv[] )
 
             t2 = clock();
 
-            t3 = ( clock() - t ) * 1000;
+            t3 = ( t2 - t ) * 1000;
             printf ( "Vrijeme 2; %Lf", (long double)t2 );
 
 
