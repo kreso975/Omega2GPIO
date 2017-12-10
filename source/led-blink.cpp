@@ -43,23 +43,13 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-test" )  )
         {
             std::chrono::microseconds ten_microseconds{20};
-            clock_t t, t2, t3;
-            unsigned int usecs = 20;
 
-            t = clock();
-            usleep(usecs);
+            Clock::time_point pulseStart = Clock::now();
 
-            //std::this_thread::sleep_for(ten_microseconds);
+            std::this_thread::sleep_for(ten_microseconds);
 
-            t2 = clock();
+            printf ( "Vrijeme 1; %Lf", (long double)pulseStart );
 
-            t3 = ( t2 - t ) * 1000;
-            printf ( "Vrijeme 1; %Lf", (long double)t );
-            printf ( "Vrijeme 2; %Lf", (long double)t2 );
-
-
-
-            printf ( "Vrijeme 3; %Lf", (long double)t3 );
         }
         else if ( ( arg == "-p" ) || ( arg == "--pin" ) )
         {
@@ -122,12 +112,10 @@ int main( int argc, char* argv[] )
                 Gpio::digitalWrite( TRIG_PIN, false );
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 0 )              // Check whether the ECHO is LOW
-                    t = clock();
-                    // Clock::time_point pulseStart = Clock::now();        // Saves the last known time of LOW pulse
+                    Clock::time_point pulseStart = Clock::now();        // Saves the last known time of LOW pulse
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 1 )              // Check whether the ECHO is HIGH
-                    t = ( clock() - t ) * 1000;
-                    //Clock::time_point pulseEnd = Clock::now();          // Saves the last known time of HIGH pulse
+                    Clock::time_point pulseEnd = Clock::now();          // Saves the last known time of HIGH pulse
 
 
                // duration<double> time_span = duration_cast<duration<double>>(pulseEnd - pulseStart);
