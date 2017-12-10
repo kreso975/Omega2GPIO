@@ -109,16 +109,19 @@ int main( int argc, char* argv[] )
 
             while ( true )
             {
-                Gpio::digitalWrite( TRIG_PIN, 0 );
+                bool ledStatus = false;
+                Gpio::digitalWrite( TRIG_PIN, ledStatus );
                 //std::this_thread::sleep_for(two_microseconds);          // Delay of 2 microseconds
                 usleep(2 * 1000);
-                Gpio::digitalWrite( TRIG_PIN, 1 );
+                ledStatus = true;
+                Gpio::digitalWrite( TRIG_PIN, ledStatus );
                 //std::this_thread::sleep_for(ten_microseconds);          // Delay of 10 microseconds
                 usleep(10 * 1000);
-                Gpio::digitalWrite( TRIG_PIN, 0 );
+                ledStatus = false;
+                Gpio::digitalWrite( TRIG_PIN, ledStatus );
 
                 Clock::time_point pulseStart = Clock::now();
-                while ( Gpio::digitalRead(ECHO_PIN) == 0 )              // Check whether the ECHO is LOW
+                while ( Gpio::digitalRead(ECHO_PIN) == false )              // Check whether the ECHO is LOW
                 {
                     // Saves the last known time of LOW pulse
                     Clock::time_point pulseStart = Clock::now();
@@ -127,7 +130,7 @@ int main( int argc, char* argv[] )
 
 
                 Clock::time_point pulseEnd = Clock::now();
-                while ( Gpio::digitalRead(ECHO_PIN) == 1 )              // Check whether the ECHO is HIGH
+                while ( Gpio::digitalRead(ECHO_PIN) == true )              // Check whether the ECHO is HIGH
                 {
                     // Saves the last known time of HIGH pulse
                     Clock::time_point pulseEnd = Clock::now();
