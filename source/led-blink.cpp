@@ -51,9 +51,9 @@ int main( int argc, char* argv[] )
             high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
 
-            duration<double> time_span = duration_cast < duration <double>> (t2 - t1);
+            duration<double> time_span = duration_cast<second>(t2 - t1).count();
 
-            std::cout << "It took me " << time_span.count() << " seconds.";
+            std::cout << "It took me " << time_span << " seconds.";
             std::cout << std::endl;
 
             //printf ( "Vrijeme 1; %Lf", pulseStart );
@@ -126,7 +126,7 @@ int main( int argc, char* argv[] )
 
                 std::cout << "Delta pulse_end-pulse_start: "
                          // << pulseDuration.count()
-                          << duration_cast<miliseconds>(pulseEnd - pulseStart).count()
+                          << duration_cast<milliseconds>(pulseEnd - pulseStart).count()
                           << " microseconds\n" << std::endl;
 
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
