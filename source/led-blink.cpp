@@ -42,7 +42,7 @@ int main( int argc, char* argv[] )
 
         else if ( ( arg == "-test" )  )
         {
-            std::chrono::microseconds ten_microseconds{10};
+            std::chrono::microseconds ten_microseconds{20};
             clock_t t;
 
             t = clock();
