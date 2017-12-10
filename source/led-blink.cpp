@@ -35,7 +35,7 @@ int main( int argc, char* argv[] )
         Gpio::initialize();
 
         std::string arg = argv[1];
-        std::string arg2 = argv[2];
+        //std::string arg2 = argv[2];
         std::string arg3 = argv[3];
 
         if ( ( arg == "-h" ) || ( arg == "--help" ) )
@@ -52,7 +52,7 @@ int main( int argc, char* argv[] )
             high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
 
-            duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
+            duration<double> time_span = duration_cast < duration <double>> (t2 - t1);
 
             std::cout << "It took me " << time_span.count() << " seconds.";
             std::cout << std::endl;
@@ -63,12 +63,12 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-p" ) || ( arg == "--pin" ) )
         {
             // set the pin mode to output, so that we can digitalWrite() it
-            Gpio::pinMode( (int) argv[2], GPD_OUTPUT );
+            Gpio::pinMode( (int) arg2, GPD_OUTPUT );
         }
         else if ( ( arg == "-c" ) || ( arg == "--command" ) )
         {
-            if ( arg2 == "blink" )
-            {
+            //if ( arg2 == "blink" )
+            //{
                 // set the pin mode to output, so that we can digitalWrite() it
                 Gpio::pinMode( LED_PIN, GPD_OUTPUT );
 
@@ -89,12 +89,12 @@ int main( int argc, char* argv[] )
                 }
 
                 return 0;
-            }
-            else
-            {
-                show_usage(argv[0]); // Show help - no String
-                return 1;
-            }
+            //}
+            //else
+            //{
+            //    show_usage(argv[0]); // Show help - no String
+            //    return 1;
+            //}
 
         }
         else if ( ( arg == "-t" ) && ( arg3 == "-e" ) )
