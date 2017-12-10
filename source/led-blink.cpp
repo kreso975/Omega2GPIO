@@ -119,9 +119,11 @@ int main( int argc, char* argv[] )
                 std::this_thread::sleep_for(ten_microseconds);          // Delay of 10 microseconds
                 Gpio::digitalWrite( TRIG_PIN, false );
 
+                high_resolution_clock::time_point pulseStart = high_resolution_clock::now();
                 while ( Gpio::digitalRead(ECHO_PIN) == 0 )              // Check whether the ECHO is LOW
                     high_resolution_clock::time_point pulseStart = high_resolution_clock::now();        // Saves the last known time of LOW pulse
 
+                high_resolution_clock::time_point pulseEnd = high_resolution_clock::now();
                 while ( Gpio::digitalRead(ECHO_PIN) == 1 )              // Check whether the ECHO is HIGH
                     high_resolution_clock::time_point pulseEnd = high_resolution_clock::now();          // Saves the last known time of HIGH pulse
 
