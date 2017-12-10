@@ -84,6 +84,8 @@ int main( int argc, char* argv[] )
             std::chrono::microseconds ten_microseconds{10};
 
             //const auto pulseStart, pulseEnd;
+            clock_t t;
+
 
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
@@ -99,15 +101,17 @@ int main( int argc, char* argv[] )
                 Gpio::digitalWrite( TRIG_PIN, false );
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 0 )              // Check whether the ECHO is LOW
-                    Clock::time_point pulseStart = Clock::now();        // Saves the last known time of LOW pulse
+                    t = clock();
+                    // Clock::time_point pulseStart = Clock::now();        // Saves the last known time of LOW pulse
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 1 )              // Check whether the ECHO is HIGH
-                    Clock::time_point pulseEnd = Clock::now();          // Saves the last known time of HIGH pulse
+                    t = clock() - t;
+                    //Clock::time_point pulseEnd = Clock::now();          // Saves the last known time of HIGH pulse
 
 
-                duration<double> time_span = duration_cast<duration<double>>(pulseEnd - pulseStart);
+               // duration<double> time_span = duration_cast<duration<double>>(pulseEnd - pulseStart);
 
-                std::cout << "It took me " << time_span.count() << " seconds.";
+                std::cout << "It took me " << t << " miliseconds.";
                 std::cout << std::endl;
 
                 /*
