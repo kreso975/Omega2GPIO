@@ -105,13 +105,13 @@ int main( int argc, char* argv[] )
                     // Clock::time_point pulseStart = Clock::now();        // Saves the last known time of LOW pulse
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 1 )              // Check whether the ECHO is HIGH
-                    t = clock() - t;
+                    t = ( clock() - t ) * 1000;
                     //Clock::time_point pulseEnd = Clock::now();          // Saves the last known time of HIGH pulse
 
 
                // duration<double> time_span = duration_cast<duration<double>>(pulseEnd - pulseStart);
 
-                std::cout << "It took me " << t << " miliseconds.";
+                std::cout << "It took me " << t << " microseconds.";
                 std::cout << std::endl;
 
                 /*
@@ -119,9 +119,9 @@ int main( int argc, char* argv[] )
                           << duration_cast<std::chrono::microseconds>(pulseEnd - pulseStart).count()
                           << " microseconds\n" << std::endl;
                 */
-                auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
+                //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
 
-                float distance = pulse_duration * 17150;          // Multiply pulse duration by 17150 to get distance
+                float distance = t * 17150;          // Multiply pulse duration by 17150 to get distance
                 distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
 
                 if ( ( distance > 2 ) && ( distance < 400 ) )   // Check whether the distance is within range
