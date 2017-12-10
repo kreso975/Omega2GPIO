@@ -97,7 +97,6 @@ int main( int argc, char* argv[] )
         {
             // HC-SR04
             typedef std::chrono::duration<float, std::milli> duration;
-            duration pulseStart, pulseEnd;
 
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
@@ -113,15 +112,15 @@ int main( int argc, char* argv[] )
 
                 Gpio::digitalWrite( TRIG_PIN, false );
 
-                //Clock::time_point pulseStart = Clock::now();
+                Clock::time_point pulseStart = Clock::now();
 
 
                 while ( Gpio::digitalRead(ECHO_PIN) == 0 )          // Check whether the ECHO is LOW
-                    Clock::time_point pulseStart = Clock::now();    // Saves the last known time of LOW pulse
+                    //Clock::time_point pulseStart = Clock::now();    // Saves the last known time of LOW pulse
 
-                //Clock::time_point pulseEnd = Clock::now();
+                Clock::time_point pulseEnd = Clock::now();
                 while ( Gpio::digitalRead(ECHO_PIN) == 1 )          // Check whether the ECHO is HIGH
-                    Clock::time_point pulseEnd = Clock::now();      // Saves the last known time of HIGH pulse
+                    //Clock::time_point pulseEnd = Clock::now();      // Saves the last known time of HIGH pulse
 
                //duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
                 auto dur = pulseEnd - pulseStart;
