@@ -44,11 +44,17 @@ int main( int argc, char* argv[] )
         {
             std::chrono::microseconds ten_microseconds{20};
 
-            Clock::time_point pulseStart = Clock::now();
+            high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
             std::this_thread::sleep_for(ten_microseconds);
 
-            printf ( "Vrijeme 1; %Lf", pulseStart );
+            high_resolution_clock::time_point t2 = high_resolution_clock::now();
+
+            std::cout << "It took me " << t1 << " seconds.\n";
+            std::cout << "It took me 2" << t2 << " seconds.\n";
+            std::cout << std::endl;
+
+            //printf ( "Vrijeme 1; %Lf", pulseStart );
 
         }
         else if ( ( arg == "-p" ) || ( arg == "--pin" ) )
