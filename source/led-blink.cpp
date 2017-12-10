@@ -63,7 +63,7 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-p" ) || ( arg == "--pin" ) )
         {
             // set the pin mode to output, so that we can digitalWrite() it
-            Gpio::pinMode( (int) arg2, GPD_OUTPUT );
+            //Gpio::pinMode( (int) arg2, GPD_OUTPUT );
         }
         else if ( ( arg == "-c" ) || ( arg == "--command" ) )
         {
