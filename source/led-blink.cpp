@@ -35,6 +35,7 @@ int main( int argc, char* argv[] )
         Gpio::initialize();
 
         std::string arg = argv[1];
+        std::string arg2 = argv[2];
         std::string arg3 = argv[3];
 
         if ( ( arg == "-h" ) || ( arg == "--help" ) )
@@ -66,7 +67,7 @@ int main( int argc, char* argv[] )
         }
         else if ( ( arg == "-c" ) || ( arg == "--command" ) )
         {
-            if ( argv[2] == "1" )
+            if ( argv2 == "blink" )
             {
                 // set the pin mode to output, so that we can digitalWrite() it
                 Gpio::pinMode( LED_PIN, GPD_OUTPUT );
