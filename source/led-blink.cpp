@@ -66,10 +66,10 @@ int main( int argc, char* argv[] )
         }
         else if ( ( arg == "-c" ) || ( arg == "--command" ) )
         {
-            if ( argv[2] == "blink" )
+            if ( argv[2] == "1" )
             {
                 // set the pin mode to output, so that we can digitalWrite() it
-                //Gpio::pinMode( LED_PIN, GPD_OUTPUT );
+                Gpio::pinMode( LED_PIN, GPD_OUTPUT );
 
                 // by the default our led is set to be on
                 bool ledStatus = true;
@@ -78,7 +78,7 @@ int main( int argc, char* argv[] )
                 while ( counter <= 20 )
                 {
                     // toggle the pin
-                    //Gpio::digitalWrite(LED_PIN, ledStatus);
+                    Gpio::digitalWrite(LED_PIN, ledStatus);
 
                     // and wait 500 ms
                     usleep(500 * 1000);
@@ -109,10 +109,11 @@ int main( int argc, char* argv[] )
             while ( true )
             {
                 Gpio::digitalWrite( TRIG_PIN, 0 );
-                std::this_thread::sleep_for(two_microseconds);          // Delay of 2 microseconds
-
+                //std::this_thread::sleep_for(two_microseconds);          // Delay of 2 microseconds
+                usleep(2 * 1000);
                 Gpio::digitalWrite( TRIG_PIN, 1 );
-                std::this_thread::sleep_for(ten_microseconds);          // Delay of 10 microseconds
+                //std::this_thread::sleep_for(ten_microseconds);          // Delay of 10 microseconds
+                usleep(10 * 1000);
                 Gpio::digitalWrite( TRIG_PIN, 0 );
 
                 Clock::time_point pulseStart = Clock::now();
