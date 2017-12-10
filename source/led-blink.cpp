@@ -49,7 +49,10 @@ int main( int argc, char* argv[] )
             std::this_thread::sleep_for(ten_microseconds);
 
             t = ( clock() - t ) * 1000;
-            printf ( t );
+
+
+
+            printf ( "Vrijeme; %ld", t );
         }
         else if ( ( arg == "-p" ) || ( arg == "--pin" ) )
         {
