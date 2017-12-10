@@ -130,8 +130,8 @@ int main( int argc, char* argv[] )
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
 
 
-                float distance = (double) pulseDuration * 17150;          // Multiply pulse duration by 17150 to get distance
-                distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
+                //float distance = (double) pulseDuration * 17150;          // Multiply pulse duration by 17150 to get distance
+                //distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
 
                 /*
                 if ( ( distance > 2 ) && ( distance < 400 ) )   // Check whether the distance is within range
