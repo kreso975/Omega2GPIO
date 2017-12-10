@@ -54,6 +54,7 @@ int main( int argc, char* argv[] )
             std::cout << "It took me 2" << t2 << " seconds.\n";
             std::cout << std::endl;
 
+
             //printf ( "Vrijeme 1; %Lf", pulseStart );
 
         }
