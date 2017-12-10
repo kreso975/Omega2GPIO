@@ -35,7 +35,6 @@ int main( int argc, char* argv[] )
         Gpio::initialize();
 
         std::string arg = argv[1];
-        //std::string arg2 = argv[2];
         std::string arg3 = argv[3];
 
         if ( ( arg == "-h" ) || ( arg == "--help" ) )
@@ -109,8 +108,10 @@ int main( int argc, char* argv[] )
             {
                 Gpio::digitalWrite( TRIG_PIN, false );
                 std::this_thread::sleep_for(seconds(1));          // Delay of 2 seconds
+
                 Gpio::digitalWrite( TRIG_PIN, true );
                 std::this_thread::sleep_for(microseconds{10});     // Delay of 10 microseconds
+
                 Gpio::digitalWrite( TRIG_PIN, false );
 
                 Clock::time_point pulseStart = Clock::now();
@@ -121,10 +122,11 @@ int main( int argc, char* argv[] )
                 while ( Gpio::digitalRead(ECHO_PIN) == 1 )          // Check whether the ECHO is HIGH
                     Clock::time_point pulseEnd = Clock::now();      // Saves the last known time of HIGH pulse
 
-               duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
+               //duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
 
                 std::cout << "Delta pulse_end-pulse_start: "
-                          << pulseDuration.count()
+                         // << pulseDuration.count()
+                        << chrono::duration_cast<chrono::microseconds>(pulseEnd - pulseStart).count()
                           << " microseconds\n" << std::endl;
 
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
