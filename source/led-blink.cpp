@@ -9,7 +9,7 @@
 using namespace std::chrono;
 typedef std::chrono::high_resolution_clock Clock;
 
-const uint8_t LED_PIN = 7;          // Test pin - LED light
+const uint8_t LED_PIN = 6;          // Test pin - LED light
 
 const uint8_t TRIG_PIN = 7;         // Associate pin 9 to TRIG
 const uint8_t ECHO_PIN = 6;         // Associate pin 8 to ECHO
