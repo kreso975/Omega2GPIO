@@ -126,18 +126,18 @@ int main( int argc, char* argv[] )
                     Clock::time_point pulseEnd = Clock::now();          // Saves the last known time of HIGH pulse
 
 
-               // duration<double> time_span = duration_cast<duration<double>>(pulseEnd - pulseStart);
+               duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
 
 
-                /*
+
                 std::cout << "Delta pulse_end-pulse_start: "
-                          << duration_cast<std::chrono::microseconds>(pulseEnd - pulseStart).count()
+                          << duration_cast<std::chrono::microseconds>pulseDuration.count()
                           << " microseconds\n" << std::endl;
-                */
+
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
 
-               // float distance = t * 17150;          // Multiply pulse duration by 17150 to get distance
-                float distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
+                float distance = pulseDuration * 17150;          // Multiply pulse duration by 17150 to get distance
+                distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
 
                 if ( ( distance > 2 ) && ( distance < 400 ) )   // Check whether the distance is within range
                     printf ( "Distance: %4.2f cm \n", distance - 0.5); // Print distance with 0.5 cm calibration
