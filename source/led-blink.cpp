@@ -12,8 +12,8 @@ typedef std::chrono::high_resolution_clock Clock;
 
 const uint8_t LED_PIN = 6;          // Test pin - LED light
 
-const uint8_t TRIG_PIN = 3;         // Associate pin 9 to TRIG
-const uint8_t ECHO_PIN = 2;         // Associate pin 8 to ECHO
+const uint8_t TRIG_PIN = 18;         // Associate pin 9 to TRIG
+const uint8_t ECHO_PIN = 19;         // Associate pin 8 to ECHO
 
 
 
@@ -113,14 +113,12 @@ int main( int argc, char* argv[] )
                 Gpio::digitalWrite( TRIG_PIN, false );
 
                 Clock::time_point pulseStart = Clock::now();
-
-
-                while ( Gpio::digitalRead(ECHO_PIN) == 0 )  {}        // Check whether the ECHO is LOW
-                    //Clock::time_point pulseStart = Clock::now();    // Saves the last known time of LOW pulse
+                while ( Gpio::digitalRead(ECHO_PIN) == 0 )          // Check whether the ECHO is LOW
+                    Clock::time_point pulseStart = Clock::now();    // Saves the last known time of LOW pulse
 
                 Clock::time_point pulseEnd = Clock::now();
-                while ( Gpio::digitalRead(ECHO_PIN) == 1 )  {}        // Check whether the ECHO is HIGH
-                    //Clock::time_point pulseEnd = Clock::now();      // Saves the last known time of HIGH pulse
+                while ( Gpio::digitalRead(ECHO_PIN) == 1 )          // Check whether the ECHO is HIGH
+                    Clock::time_point pulseEnd = Clock::now();      // Saves the last known time of HIGH pulse
 
                //duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
                 auto dur = pulseEnd - pulseStart;
