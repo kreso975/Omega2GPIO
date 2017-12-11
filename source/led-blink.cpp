@@ -119,9 +119,11 @@ int main( int argc, char* argv[] )
                 std::cout << "Delta pulse_end-pulse_start: "
                           << duration_cast<microseconds>(pulseEnd - pulseStart).count()
                           << " microseconds \n"
+                          << duration_cast<microseconds>((pulseEnd - pulseStart) / 29.1 / 2 ).count()
+                          << " cm\n\n"
                           << std::chrono::duration_cast<std::chrono::duration<float>>(dur).count()
                           << " float\n"
-                          << duration_cast<microseconds>((pulseEnd - pulseStart) / 29.1 / 2 ).count()
+                          << std::chrono::duration_cast<std::chrono::duration<float>>(dur * 10000000 / 29.1 / 2 ).count()
                           << " cm\n\n" << std::endl;
 
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
