@@ -44,7 +44,7 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-test" )  )
         {
             int xMicros = atoi(argv[2]);
-            //std::chrono::microseconds argvMicro = argv[2];
+            std::chrono::microseconds argvMicro = xMicros;
             high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
             std::this_thread::sleep_for(microseconds{xMicros});
