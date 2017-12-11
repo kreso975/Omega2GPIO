@@ -44,7 +44,7 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-test" )  )
         {
             long argvMicro = 1;
-            argvMicro = std::atol( argv[1] );
+            argvMicro = std::atol( argv[2] );
             high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
             std::this_thread::sleep_for(microseconds{argvMicro});
@@ -52,7 +52,7 @@ int main( int argc, char* argv[] )
             high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
 
-            std::cout << "It took me " << duration_cast<microseconds>(t2 - t1).count() << " seconds.";
+            std::cout << "It took me " << duration_cast<microseconds>(t2 - t1).count() << " microseconds.";
             std::cout << std::endl;
 
             //printf ( "Vrijeme 1; %Lf", pulseStart );
