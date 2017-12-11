@@ -73,6 +73,26 @@ int main( int argc, char* argv[] )
             std::cout << "20. It took me " << duration_cast<microseconds>(t6 - t5).count() << " microseconds.\n";
             std::cout << std::endl;
 
+            high_resolution_clock::time_point t7 = high_resolution_clock::now();
+
+            std::this_thread::sleep_for(microseconds{30});
+
+            high_resolution_clock::time_point t8 = high_resolution_clock::now();
+
+
+            std::cout << "30. It took me " << duration_cast<microseconds>(t8 - t7).count() << " microseconds.\n";
+            std::cout << std::endl;
+
+            high_resolution_clock::time_point t9 = high_resolution_clock::now();
+
+            std::this_thread::sleep_for(microseconds{40});
+
+            high_resolution_clock::time_point t10 = high_resolution_clock::now();
+
+
+            std::cout << "40. It took me " << duration_cast<microseconds>(t10 - t9).count() << " microseconds.\n";
+            std::cout << std::endl;
+
             //printf ( "Vrijeme 1; %Lf", pulseStart );
 
         }
