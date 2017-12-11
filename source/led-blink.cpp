@@ -116,6 +116,9 @@ int main( int argc, char* argv[] )
                //duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
                 auto dur = pulseEnd - pulseStart;
 
+                float distance = std::chrono::duration<float>>(dur * 1000000 / 29.1 / 2 ).count();
+                distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
+
                 std::cout << "Delta pulse_end-pulse_start: "
                           << duration_cast<microseconds>(pulseEnd - pulseStart).count()
                           << " microseconds \n"
@@ -123,8 +126,10 @@ int main( int argc, char* argv[] )
                           << " cm\n\n"
                           << std::chrono::duration_cast<std::chrono::duration<float>>(dur).count()
                           << " float\n"
-                          << std::chrono::duration_cast<std::chrono::duration<float>>(dur * 10000000 / 29.1 / 2 ).count()
-                          << " cm\n\n" << std::endl;
+                          << std::chrono::duration_cast<std::chrono::duration<float>>(dur * 1000000 / 29.1 / 2 ).count()
+                          << " cm\n"
+                          << distance
+                          << " cm rounded\n\n" << std::endl;
 
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
 
