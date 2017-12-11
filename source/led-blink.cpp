@@ -115,10 +115,10 @@ int main( int argc, char* argv[] )
 
                //duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
                 auto dur = pulseEnd - pulseStart;
-                //float distance = duration<float>>(dur * 1000000 / 29.1 / 2 ).count();
+                duration<float> distance = (dur * 1000000 / 29.1 / 2 ).count();
 
 
-                //distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
+                distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
 
                 std::cout << "Delta pulse_end-pulse_start: "
                           << duration_cast<microseconds>(pulseEnd - pulseStart).count()
@@ -129,7 +129,7 @@ int main( int argc, char* argv[] )
                           << " float\n"
                           << duration_cast<duration<float>>(dur * 1000000 / 29.1 / 2 ).count()
                           << " cm\n"
-                          << roundf( duration  * 100 ) / 100.count()
+                          << distance
                           << " cm rounded\n\n" << std::endl;
 
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
