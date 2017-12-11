@@ -43,16 +43,34 @@ int main( int argc, char* argv[] )
 
         else if ( ( arg == "-test" )  )
         {
-            long argvMicro = 1;
-            argvMicro = std::atol( argv[2] );
             high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
-            std::this_thread::sleep_for(microseconds{argvMicro});
+            //std::this_thread::sleep_for(microseconds{10});
 
             high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
 
-            std::cout << "It took me " << duration_cast<microseconds>(t2 - t1).count() << " microseconds.";
+            std::cout << "0. It took me " << duration_cast<microseconds>(t2 - t1).count() << " microseconds.\n";
+            std::cout << std::endl;
+
+            high_resolution_clock::time_point t1 = high_resolution_clock::now();
+
+            std::this_thread::sleep_for(microseconds{10});
+
+            high_resolution_clock::time_point t2 = high_resolution_clock::now();
+
+
+            std::cout << "10. It took me " << duration_cast<microseconds>(t2 - t1).count() << " microseconds.\n";
+            std::cout << std::endl;
+
+            high_resolution_clock::time_point t1 = high_resolution_clock::now();
+
+            std::this_thread::sleep_for(microseconds{20});
+
+            high_resolution_clock::time_point t2 = high_resolution_clock::now();
+
+
+            std::cout << "20. It took me " << duration_cast<microseconds>(t2 - t1).count() << " microseconds.\n";
             std::cout << std::endl;
 
             //printf ( "Vrijeme 1; %Lf", pulseStart );
