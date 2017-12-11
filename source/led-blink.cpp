@@ -116,7 +116,7 @@ int main( int argc, char* argv[] )
                //duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
                 auto dur = pulseEnd - pulseStart;
 
-                float distance = std::chrono::duration<float>>(dur * 1000000 / 29.1 / 2 ).count();
+                float duration = float(dur * 1000000 / 29.1 / 2 ).count();
                 distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
 
                 std::cout << "Delta pulse_end-pulse_start: "
