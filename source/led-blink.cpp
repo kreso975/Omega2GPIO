@@ -150,6 +150,7 @@ int main( int argc, char* argv[] )
         {
             // HC-SR04
             typedef std::chrono::duration<float, std::micro> duration;
+            duration<double> pulseEnd,pulseStart;
 
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
