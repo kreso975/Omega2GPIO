@@ -55,7 +55,8 @@ int main( int argc, char* argv[] )
 
             high_resolution_clock::time_point t3 = high_resolution_clock::now();
 
-            std::this_thread::sleep_for(microseconds{10});
+            //std::this_thread::sleep_for(microseconds{10});
+            usleep(0.01);
 
             high_resolution_clock::time_point t4 = high_resolution_clock::now();
 
@@ -65,7 +66,8 @@ int main( int argc, char* argv[] )
 
             high_resolution_clock::time_point t5 = high_resolution_clock::now();
 
-            std::this_thread::sleep_for(microseconds{20});
+            //std::this_thread::sleep_for(microseconds{20});
+            usleep(0.02);
 
             high_resolution_clock::time_point t6 = high_resolution_clock::now();
 
@@ -75,7 +77,8 @@ int main( int argc, char* argv[] )
 
             high_resolution_clock::time_point t7 = high_resolution_clock::now();
 
-            std::this_thread::sleep_for(microseconds{30});
+            //std::this_thread::sleep_for(microseconds{30});
+            usleep(0.03);
 
             high_resolution_clock::time_point t8 = high_resolution_clock::now();
 
@@ -85,7 +88,8 @@ int main( int argc, char* argv[] )
 
             high_resolution_clock::time_point t9 = high_resolution_clock::now();
 
-            std::this_thread::sleep_for(microseconds{40});
+            //std::this_thread::sleep_for(microseconds{40});
+            usleep(0.04);
 
             high_resolution_clock::time_point t10 = high_resolution_clock::now();
 
@@ -136,7 +140,7 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-t" ) && ( arg3 == "-e" ) )
         {
             // HC-SR04
-            typedef std::chrono::duration<float, std::milli> duration;
+            typedef std::chrono::duration<float, std::micro> duration;
 
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
