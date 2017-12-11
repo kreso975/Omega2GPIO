@@ -53,24 +53,24 @@ int main( int argc, char* argv[] )
             std::cout << "0. It took me " << duration_cast<microseconds>(t2 - t1).count() << " microseconds.\n";
             std::cout << std::endl;
 
-            high_resolution_clock::time_point t1 = high_resolution_clock::now();
+            high_resolution_clock::time_point t3 = high_resolution_clock::now();
 
             std::this_thread::sleep_for(microseconds{10});
 
-            high_resolution_clock::time_point t2 = high_resolution_clock::now();
+            high_resolution_clock::time_point t4 = high_resolution_clock::now();
 
 
-            std::cout << "10. It took me " << duration_cast<microseconds>(t2 - t1).count() << " microseconds.\n";
+            std::cout << "10. It took me " << duration_cast<microseconds>(t4 - t3).count() << " microseconds.\n";
             std::cout << std::endl;
 
-            high_resolution_clock::time_point t1 = high_resolution_clock::now();
+            high_resolution_clock::time_point t5 = high_resolution_clock::now();
 
             std::this_thread::sleep_for(microseconds{20});
 
-            high_resolution_clock::time_point t2 = high_resolution_clock::now();
+            high_resolution_clock::time_point t6 = high_resolution_clock::now();
 
 
-            std::cout << "20. It took me " << duration_cast<microseconds>(t2 - t1).count() << " microseconds.\n";
+            std::cout << "20. It took me " << duration_cast<microseconds>(t6 - t5).count() << " microseconds.\n";
             std::cout << std::endl;
 
             //printf ( "Vrijeme 1; %Lf", pulseStart );
