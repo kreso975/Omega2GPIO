@@ -149,8 +149,8 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-t" ) && ( arg3 == "-e" ) )
         {
             // HC-SR04
-            typedef std::chrono::duration<float, std::micro> duration;
-            duration<double> pulseEnd,pulseStart;
+            //typedef std::chrono::duration<float, std::micro> duration;
+            //duration<double> pulseEnd,pulseStart;
 
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
@@ -169,11 +169,13 @@ int main( int argc, char* argv[] )
                 Gpio::digitalWrite( TRIG_PIN, false );
 
                 //Clock::time_point pulseStart = Clock::now();
+                high_resolution_clock::time_point pulseStart = high_resolution_clock::now();
                 while ( !Gpio::digitalRead(ECHO_PIN)  )             // Check whether the ECHO is LOW
                     high_resolution_clock::time_point pulseStart = high_resolution_clock::now();
                     //Clock::time_point pulseStart = Clock::now();    // Saves the last known time of LOW pulse
 
                 //Clock::time_point pulseEnd = Clock::now();
+                high_resolution_clock::time_point pulseEnd = high_resolution_clock::now();
                 while ( Gpio::digitalRead(ECHO_PIN) )          // Check whether the ECHO is HIGH
                     high_resolution_clock::time_point pulseEnd = high_resolution_clock::now();
                    // Clock::time_point pulseEnd = Clock::now();      // Saves the last known time of HIGH pulse
