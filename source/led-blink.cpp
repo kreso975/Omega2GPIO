@@ -159,8 +159,8 @@ int main( int argc, char* argv[] )
             while ( true )
             {
                 Gpio::digitalWrite( TRIG_PIN, false );
-                //std::this_thread::sleep_for(seconds(1));          // Delay of 2 seconds
-                nsleep(100000);
+                std::this_thread::sleep_for(seconds(1));          // Delay of 2 seconds
+                //nsleep(1000000);
 
                 Gpio::digitalWrite( TRIG_PIN, true );
                 //std::this_thread::sleep_for(microseconds{10});     // Delay of 10 microseconds
