@@ -50,65 +50,6 @@ int main( int argc, char* argv[] )
         if ( ( arg == "-h" ) || ( arg == "--help" ) )
             show_usage(argv[0]); // Show help
 
-        else if ( ( arg == "-test" )  )
-        {
-            high_resolution_clock::time_point t1 = high_resolution_clock::now();
-
-            //std::this_thread::sleep_for(microseconds{10});
-
-            high_resolution_clock::time_point t2 = high_resolution_clock::now();
-
-
-            std::cout << "0. It took me " << duration_cast<microseconds>(t2 - t1).count() << " microseconds.\n";
-            std::cout << std::endl;
-
-            high_resolution_clock::time_point t3 = high_resolution_clock::now();
-
-            //std::this_thread::sleep_for(microseconds{10});
-            nsleep(10000);
-
-            high_resolution_clock::time_point t4 = high_resolution_clock::now();
-
-
-            std::cout << "10. It took me " << duration_cast<microseconds>(t4 - t3).count() << " microseconds.\n";
-            std::cout << std::endl;
-
-            high_resolution_clock::time_point t5 = high_resolution_clock::now();
-
-            //std::this_thread::sleep_for(microseconds{20});
-            nsleep(20000);
-
-            high_resolution_clock::time_point t6 = high_resolution_clock::now();
-
-
-            std::cout << "20. It took me " << duration_cast<microseconds>(t6 - t5).count() << " microseconds.\n";
-            std::cout << std::endl;
-
-            high_resolution_clock::time_point t7 = high_resolution_clock::now();
-
-            //std::this_thread::sleep_for(microseconds{30});
-            nsleep(30000);
-
-            high_resolution_clock::time_point t8 = high_resolution_clock::now();
-
-
-            std::cout << "30. It took me " << duration_cast<microseconds>(t8 - t7).count() << " microseconds.\n";
-            std::cout << std::endl;
-
-            high_resolution_clock::time_point t9 = high_resolution_clock::now();
-
-            //std::this_thread::sleep_for(microseconds{40});
-            nsleep(40000);
-
-            high_resolution_clock::time_point t10 = high_resolution_clock::now();
-
-
-            std::cout << "40. It took me " << duration_cast<microseconds>(t10 - t9).count() << " microseconds.\n";
-            std::cout << std::endl;
-
-            //printf ( "Vrijeme 1; %Lf", pulseStart );
-
-        }
         else if ( ( arg == "-p" ) || ( arg == "--pin" ) )
         {
             // set the pin mode to output, so that we can digitalWrite() it
@@ -149,8 +90,6 @@ int main( int argc, char* argv[] )
         else if ( ( arg == "-t" ) && ( arg3 == "-e" ) )
         {
             // HC-SR04
-            //typedef std::chrono::duration<float, std::micro> duration;
-            //duration<double> pulseEnd,pulseStart;
 
             // TODO use arg values for GPIO PINs
             Gpio::pinMode( TRIG_PIN, GPD_OUTPUT );
@@ -159,35 +98,30 @@ int main( int argc, char* argv[] )
             while ( true )
             {
                 Gpio::digitalWrite( TRIG_PIN, false );
-                std::this_thread::sleep_for(seconds(1));          // Delay of 2 seconds
-                //nsleep(1000000);
+                std::this_thread::sleep_for(seconds(1));        // Delay of 2 seconds
 
                 Gpio::digitalWrite( TRIG_PIN, true );
-                //std::this_thread::sleep_for(microseconds{10});     // Delay of 10 microseconds
-                nsleep(10000);
+                nsleep(10000);                                  // I used this because it's more precise
 
                 Gpio::digitalWrite( TRIG_PIN, false );
 
 
-                while ( !Gpio::digitalRead(ECHO_PIN)  ) {}            // Check whether the ECHO is LOW
-                Clock::time_point pulseStart = Clock::now();
+                // TODO, add value greater then 400cm as out of range here
+                while ( !Gpio::digitalRead(ECHO_PIN)  ) {}      // Check whether the ECHO is LOW
+                Clock::time_point pulseStart = Clock::now();    // Mark pulseStart
 
-                //Clock::time_point pulseStart = Clock::now();    // Saves the last known time of LOW pulse
-
-                //Clock::time_point pulseEnd = Clock::now();
-
-                while ( Gpio::digitalRead(ECHO_PIN) )  {}        // Check whether the ECHO is HIGH
-                Clock::time_point pulseEnd = Clock::now();      // Saves the last known time of HIGH pulse
+                while ( Gpio::digitalRead(ECHO_PIN) )  {}       // Check whether the ECHO is HIGH
+                Clock::time_point pulseEnd = Clock::now();      // Mark pulseEnd
 
                //duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
-                //auto dur = pulseEnd - pulseStart;
+                auto dur = pulseEnd - pulseStart;
 
                 std::cout << "Delta pulse_end-pulse_start: "
                          // << pulseDuration.count()
                           << duration_cast<microseconds>(pulseEnd - pulseStart).count()
                           << " microseconds \n"
-                          //<< std::chrono::duration_cast<std::chrono::duration<float>>(dur).count()
-                          << " float\n\n" << std::endl;
+                          << std::chrono::duration_cast<std::chrono::duration<int>>(dur).count()
+                          << " int\n\n" << std::endl;
 
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
 
