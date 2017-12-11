@@ -129,7 +129,7 @@ int main( int argc, char* argv[] )
                           << " float\n"
                           << duration_cast<duration<float>>(dur * 1000000 / 29.1 / 2 ).count()
                           << " cm\n"
-                          << duration_cast<duration<float>>(roundf( (dur * 1000000 / 29.1 / 2) * 100 ) / 100 ).count()
+                          << roundf( duration  * 100 ) / 100.count()
                           << " cm rounded\n\n" << std::endl;
 
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
