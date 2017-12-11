@@ -43,9 +43,10 @@ int main( int argc, char* argv[] )
 
         else if ( ( arg == "-test" )  )
         {
+            std::chrono::microseconds argvMicro = argv[2];
             high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
-            std::this_thread::sleep_for(microseconds{argv[2]});
+            std::this_thread::sleep_for(microseconds{argvMicro});
 
             high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
