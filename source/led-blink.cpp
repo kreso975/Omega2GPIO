@@ -32,7 +32,6 @@ static void show_usage( std::string argv )
 void nsleep(long us)
 {
     struct timespec wait;
-    //printf("Will sleep for is %ld\n", diff); //This will take extra ~70 microseconds
 
     wait.tv_sec = us / (1000 * 1000);
     wait.tv_nsec = (us % (1000 * 1000)) * 1000;
@@ -164,24 +163,26 @@ int main( int argc, char* argv[] )
 
                 Gpio::digitalWrite( TRIG_PIN, true );
                 //std::this_thread::sleep_for(microseconds{10});     // Delay of 10 microseconds
-                nsleep(20000);
+                nsleep(10000);
 
                 Gpio::digitalWrite( TRIG_PIN, false );
 
-                Clock::time_point pulseStart = Clock::now();
+                //Clock::time_point pulseStart = Clock::now();
                 while ( !Gpio::digitalRead(ECHO_PIN)  )             // Check whether the ECHO is LOW
-                    Clock::time_point pulseStart = Clock::now();    // Saves the last known time of LOW pulse
+                    high_resolution_clock::time_point pulseStart = high_resolution_clock::now();
+                    //Clock::time_point pulseStart = Clock::now();    // Saves the last known time of LOW pulse
 
-                Clock::time_point pulseEnd = Clock::now();
+                //Clock::time_point pulseEnd = Clock::now();
                 while ( Gpio::digitalRead(ECHO_PIN) )          // Check whether the ECHO is HIGH
-                    Clock::time_point pulseEnd = Clock::now();      // Saves the last known time of HIGH pulse
+                    high_resolution_clock::time_point pulseEnd = high_resolution_clock::now();
+                   // Clock::time_point pulseEnd = Clock::now();      // Saves the last known time of HIGH pulse
 
                //duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
                 //auto dur = pulseEnd - pulseStart;
 
                 std::cout << "Delta pulse_end-pulse_start: "
                          // << pulseDuration.count()
-                          << duration_cast<milliseconds>(pulseEnd - pulseStart).count()
+                          << duration_cast<microseconds>(pulseEnd - pulseStart).count()
                           << " microseconds \n"
                           //<< std::chrono::duration_cast<std::chrono::duration<float>>(dur).count()
                           << " float\n\n" << std::endl;
