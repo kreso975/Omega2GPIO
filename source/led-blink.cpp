@@ -29,6 +29,16 @@ static void show_usage( std::string argv )
                  << std::endl;
 }
 
+void nsleep(long us)
+{
+    struct timespec wait;
+    //printf("Will sleep for is %ld\n", diff); //This will take extra ~70 microseconds
+
+    wait.tv_sec = us / (1000 * 1000);
+    wait.tv_nsec = (us % (1000 * 1000)) * 1000;
+    nanosleep(&wait, NULL);
+}
+
 int main( int argc, char* argv[] )
 {
     if ( argc > 1 )
@@ -56,7 +66,7 @@ int main( int argc, char* argv[] )
             high_resolution_clock::time_point t3 = high_resolution_clock::now();
 
             //std::this_thread::sleep_for(microseconds{10});
-            nanosleep(10000);
+            nsleep(10000);
 
             high_resolution_clock::time_point t4 = high_resolution_clock::now();
 
@@ -67,7 +77,7 @@ int main( int argc, char* argv[] )
             high_resolution_clock::time_point t5 = high_resolution_clock::now();
 
             //std::this_thread::sleep_for(microseconds{20});
-            nanosleep(20000);
+            nsleep(20000);
 
             high_resolution_clock::time_point t6 = high_resolution_clock::now();
 
@@ -78,7 +88,7 @@ int main( int argc, char* argv[] )
             high_resolution_clock::time_point t7 = high_resolution_clock::now();
 
             //std::this_thread::sleep_for(microseconds{30});
-            nanosleep(30000);
+            nsleep(30000);
 
             high_resolution_clock::time_point t8 = high_resolution_clock::now();
 
@@ -89,7 +99,7 @@ int main( int argc, char* argv[] )
             high_resolution_clock::time_point t9 = high_resolution_clock::now();
 
             //std::this_thread::sleep_for(microseconds{40});
-            nanosleep(40000);
+            nsleep(40000);
 
             high_resolution_clock::time_point t10 = high_resolution_clock::now();
 
