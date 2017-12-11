@@ -115,7 +115,7 @@ int main( int argc, char* argv[] )
 
                //duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
                 auto dur = pulseEnd - pulseStart;
-                auto distance = duration<float>>(dur * 1000000 / 29.1 / 2 ).count();
+                auto distance = duration_cast<duration<float>>(dur * 1000000 / 29.1 / 2 ).count();
                 //float distance<duration<float>>(dur * 1000000 / 29.1 / 2 ).count();
 
 
