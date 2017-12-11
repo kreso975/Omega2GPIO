@@ -117,11 +117,12 @@ int main( int argc, char* argv[] )
                 auto dur = pulseEnd - pulseStart;
 
                 std::cout << "Delta pulse_end-pulse_start: "
-                         // << pulseDuration.count()
                           << duration_cast<microseconds>(pulseEnd - pulseStart).count()
                           << " microseconds \n"
-                          << std::chrono::duration_cast<std::chrono::duration<int>>(dur).count()
-                          << " int\n\n" << std::endl;
+                          << std::chrono::duration_cast<std::chrono::duration<float>>(dur).count()
+                          << " float\n"
+                          << duration_cast<microseconds>((pulseEnd - pulseStart) / 29.1 / 2 ).count()
+                          << " cm\n\n" << std::endl;
 
                 //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
 
