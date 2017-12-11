@@ -105,46 +105,37 @@ int main( int argc, char* argv[] )
 
                 Gpio::digitalWrite( TRIG_PIN, false );
 
-
-                // TODO, add value greater then 400cm as out of range here
-                while ( !Gpio::digitalRead(ECHO_PIN)  ) {}      // Check whether the ECHO is LOW
+                // TODO, add break for value greater then 400cm as out of range here
+                while ( !Gpio::digitalRead(ECHO_PIN) ) {}      // Check whether the ECHO is LOW
                 Clock::time_point pulseStart = Clock::now();    // Mark pulseStart
 
                 while ( Gpio::digitalRead(ECHO_PIN) )  {}       // Check whether the ECHO is HIGH
                 Clock::time_point pulseEnd = Clock::now();      // Mark pulseEnd
 
-               //duration<double> pulseDuration = duration_cast<duration<double>>(pulseEnd - pulseStart);
                 auto dur = pulseEnd - pulseStart;
                 auto distance = duration_cast<duration<float>>(dur * 1000000 / 29.1 / 2 ).count();
-                //float distance<duration<float>>(dur * 1000000 / 29.1 / 2 ).count();
 
-
+                // TODO: distance needs calibration - it measures exp less as length grows
                 distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
 
-                std::cout << "Delta pulse_end-pulse_start: "
-                          << duration_cast<microseconds>(pulseEnd - pulseStart).count()
-                          << " microseconds \n"
-                          << duration_cast<microseconds>((pulseEnd - pulseStart) / 29.1 / 2 ).count()
-                          << " cm\n\n"
-                          << duration_cast<duration<float>>(dur).count()
-                          << " float\n"
-                          << duration_cast<duration<float>>(dur * 1000000 / 29.1 / 2 ).count()
-                          << " cm\n"
-                          << distance
-                          << " cm rounded\n\n" << std::endl;
-
-                //auto pulse_duration = pulseEnd - pulseStart;   // Get pulse duration to a variable
-
-
-                //float distance =  dur * 17150;          // Multiply pulse duration by 17150 to get distance
-                //distance = roundf( distance * 100 ) / 100;        // Round to two decimal points
-
-
-                //if ( ( distance > 2 ) && ( distance < 400 ) )   // Check whether the distance is within range
-                    //printf ( "Distance: %4.2f cm \n", distance - 0.5); // Print distance with 0.5 cm calibration
-                //else
-                    //printf ( "Out Of Range \n" );                       //display out of range
-
+                if ( ( distance > 2 ) && ( distance < 400 ) )   // Check whether the distance is within range
+                {
+                    std::cout << "Delta pulse_end-pulse_start: "
+                              << duration_cast<microseconds>(pulseEnd - pulseStart).count()
+                              << " microseconds \n"
+                              << duration_cast<microseconds>((pulseEnd - pulseStart) / 29.1 / 2).count()
+                              << " cm\n\n"
+                              << duration_cast<duration<float>>(dur).count()
+                              << " float\n"
+                              << duration_cast<duration<float>>(dur * 1000000 / 29.1 / 2).count()
+                              << " cm\n"
+                              << distance
+                              << " cm rounded\n\n" << std::endl;
+                }
+                else
+                {
+                    std::cout << "Out Of Range \n" << std::endl;
+                }
 
             }
 
