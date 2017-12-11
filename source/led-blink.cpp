@@ -181,7 +181,7 @@ int main( int argc, char* argv[] )
 
                 std::cout << "Delta pulse_end-pulse_start: "
                          // << pulseDuration.count()
-                          << duration_cast<microseconds>(pulseEnd - pulseStart).count()
+                          << duration_cast<milliseconds>(pulseEnd - pulseStart).count()
                           << " microseconds \n"
                           //<< std::chrono::duration_cast<std::chrono::duration<float>>(dur).count()
                           << " float\n\n" << std::endl;
